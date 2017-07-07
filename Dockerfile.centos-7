@@ -1,9 +1,12 @@
 # Clone from the CentOS 7
-FROM centos:centos7
+FROM centos:7.3.1611
+
 
 MAINTAINER Jan Pazdziora
 
-RUN yum install -y ipa-server ipa-server-dns ipa-server-trust-ad && yum clean all
+ENV FREEIPA_VERSION=4.4.0-14.el7.centos
+
+RUN yum install -y ipa-server-${FREEIPA_VERSION} ipa-server-dns-${FREEIPA_VERSION} ipa-server-trust-ad-${FREEIPA_VERSION} && yum clean all
 
 # Workaround 1364139
 RUN sed -i '/installutils.verify_fqdn(config.master_host_name, options.no_host_dns)/s/)/, local_hostname=False)/' /usr/lib/python2.7/site-packages/ipaserver/install/server/replicainstall.py && python -m compileall /usr/lib/python2.7/site-packages/ipaserver/install/server/replicainstall.py
