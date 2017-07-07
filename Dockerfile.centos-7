@@ -1,7 +1,6 @@
 # Clone from the CentOS 7
 FROM centos:7.3.1611
 
-
 MAINTAINER Jan Pazdziora
 
 ENV FREEIPA_VERSION=4.4.0-14.el7.centos
